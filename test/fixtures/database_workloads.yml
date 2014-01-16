@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  num_database_vms: 1
+  num_vcpus_per_database_vm: 1
+  total_mhz_per_database: 1
+  memory_per_database_mb: 1
+  capacity_per_database_mb: 1
+  working_set_per_database_mb: 1
+  peak_iops_per_database: 1
+
+two:
+  num_database_vms: 1
+  num_vcpus_per_database_vm: 1
+  total_mhz_per_database: 1
+  memory_per_database_mb: 1
+  capacity_per_database_mb: 1
+  working_set_per_database_mb: 1
+  peak_iops_per_database: 1

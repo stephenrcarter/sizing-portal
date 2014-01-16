@@ -1,0 +1,30 @@
+<h1> Update Workload </h1>
+
+<%= form_for @workload do |f| %>
+  <% if @workload.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@workload.errors.count, "error") %> prohibited 
+      this workload from being saved:</h2>
+    <ul>
+    <% @workload.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :workload_name %></br>
+    <%= f.text_field :workload_name %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<% if WorkloadType.find(@workload.workload_type_id).workload_type_name == "VDI" %>
+  <%= link_to("Update VDI Workload", edit_workload_vdi_workload_path(@workload.vdi_workload.id)) %>
+<% elsif WorkloadType.find(@workload.workload_type_id).workload_type_name == "Database" %>   
+  <%= link_to("Update Database Workload", edit_workload_database_workload_path(@workload.database_workload.id)) %>
+<%elsif WorkloadType.find(@workload.workload_type_id).workload_type_name == "Manual" %>
+  <%= link_to("Update Workload Requirements", edit_workload_workload_requirement_path(@workload.workload_requirement.id)) %>
+<% end %>

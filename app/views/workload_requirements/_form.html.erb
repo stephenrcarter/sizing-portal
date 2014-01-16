@@ -1,0 +1,40 @@
+<%= form_for [@workload, @workload_requirement] do |f| %>
+  <% if @workload_requirement.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@workload_requirement.errors.count, "error") %> prohibited 
+      this environment from being saved:</h2>
+    <ul>
+    <% @workload_requirement.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :num_vms %></br>
+    <%= f.text_field :num_vms %>
+  </p>
+  <p>
+    <%= f.label :num_vcpus %></br>
+    <%= f.text_field :num_vcpus  %>
+  </p>
+  <p>
+    <%= f.label :cpu_cycles_mhz %></br>
+    <%= f.text_field :cpu_cycles_mhz %>
+  </p>
+  <p>
+    <%= f.label :memory_mb %></br>
+    <%= f.text_field :memory_mb  %>
+  </p>
+  <p>
+    <%= f.label :disk_capacity_mb %></br>
+    <%= f.text_field :disk_capacity_mb  %>
+  </p>
+  <p>
+    <%= f.label :ssd_capacity_mb %></br>
+    <%= f.text_field :ssd_capacity_mb %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

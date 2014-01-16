@@ -1,0 +1,25 @@
+<h1><%= @environment.title %></h1>
+<small><%= @environment.created_at %></small>
+
+<h2>Workloads</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @environment.workloads.each do |workload| %>
+    <tr>
+      <td><%= workload.workload_name %></td>
+      <td><%= WorkloadType.find(workload.workload_type_id).workload_type_name %></td>
+      <td><%= link_to("Edit", edit_workload_path(workload.id)) %></td>
+      <td><%= link_to("Delete", workload, :method => :delete, :class => "action") %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to("Add Workload", new_environment_workload_path(@environment)) %></p>
+
+<%= link_to "Back", environments_path %> 
+| <%= link_to "Edit", edit_environment_path(@environment) %>

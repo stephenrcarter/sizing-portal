@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workload_id: 
+  num_desktops: 1
+  num_vcpus_per_desktop: 1
+  mhz_per_desktop: 1
+  memory_per_desktop_mb: 1
+  capacity_per_desktop_mb: 1
+  desktop_concurrency_percent: 1
+  vcpus_per_physical_core: 1
+  memory_overcommit_percent: 1
+
+two:
+  workload_id: 
+  num_desktops: 1
+  num_vcpus_per_desktop: 1
+  mhz_per_desktop: 1
+  memory_per_desktop_mb: 1
+  capacity_per_desktop_mb: 1
+  desktop_concurrency_percent: 1
+  vcpus_per_physical_core: 1
+  memory_overcommit_percent: 1

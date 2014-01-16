@@ -1,0 +1,44 @@
+<%= form_for [@workload, @database_workload] do |f| %>
+  <% if @database_workload.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@database_workload.errors.count, "error") %> prohibited 
+      this environment from being saved:</h2>
+    <ul>
+    <% @database_workload.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :num_database_vms %></br>
+    <%= f.text_field :num_database_vms %>
+  </p>
+  <p>
+    <%= f.label :num_vcpus_per_database_vm %></br>
+    <%= f.text_field :num_vcpus_per_database_vm  %>
+  </p>
+  <p>
+    <%= f.label :mhz_per_database_vm %></br>
+    <%= f.text_field :mhz_per_database_vm  %>
+  </p>
+  <p>
+    <%= f.label :memory_per_database_vm_mb %></br>
+    <%= f.text_field :memory_per_database_vm_mb  %>
+  </p>
+  <p>
+    <%= f.label :capacity_per_database_vm_mb %></br>
+    <%= f.text_field :capacity_per_database_vm_mb  %>
+  </p>
+  <p>
+    <%= f.label :working_set_per_database_vm_mb %></br>
+    <%= f.text_field :working_set_per_database_vm_mb %>
+  </p>
+  <p>
+    <%= f.label :peak_iops_per_database_vm %></br>
+    <%= f.text_field :peak_iops_per_database_vm  %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

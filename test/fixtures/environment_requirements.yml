@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  environment_id: 
+  cpu_cores: 1
+  cpu_cycles: 1.5
+  ram_gb: 1
+  disk_capacity_gb: 1.5
+  ssd_capacity_gb: 1.5
+
+two:
+  environment_id: 
+  cpu_cores: 1
+  cpu_cycles: 1.5
+  ram_gb: 1
+  disk_capacity_gb: 1.5
+  ssd_capacity_gb: 1.5

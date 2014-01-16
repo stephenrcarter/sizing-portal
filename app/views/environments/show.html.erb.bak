@@ -1,0 +1,37 @@
+<h1><%= @environment.title %></h1>
+<small><%= @environment.created_at %></small>
+
+<h2>Workloads</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @environment.workloads.each do |workload| %>
+    <tr>
+      <td><%= workload.workload_name %></td>
+      <td><%= WorkloadType.find(workload.workload_type_id).workload_type_name %></td>
+      <td><%= link_to("Edit", edit_workload_path) %></td>
+      <td><%= link_to("Delete", workload, :method => :delete, :class => "action") %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>Add a workload to this environment:</h2>
+<%= form_for([@environment, @environment.workloads.build]) do |f| %>
+  <p>
+    <%= f.label :workload_name %></br>
+    <%= f.text_field :workload_name %>
+  </p>
+  <p>
+    <%= f.collection_select(:workload_type_id, WorkloadType.all, :id, :workload_type_name, include_blank: false) %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to "Back", environments_path %> 
+| <%= link_to "Edit", edit_environment_path(@environment) %>

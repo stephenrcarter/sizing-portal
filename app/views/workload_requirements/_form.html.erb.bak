@@ -1,0 +1,48 @@
+<%= form_for @workload.vdi_workload do |f| %>
+  <% if @vdi_workload.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@vdi_workload.errors.count, "error") %> prohibited 
+      this environment from being saved:</h2>
+    <ul>
+    <% @vdi_workload.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :num_desktops %></br>
+    <%= f.text_field :num_desktops %>
+  </p>
+  <p>
+    <%= f.label :num_vcpus_per_desktop %></br>
+    <%= f.text_field :num_vcpus_per_desktop  %>
+  </p>
+  <p>
+    <%= f.label :mhz_per_desktop %></br>
+    <%= f.text_field :mhz_per_desktop  %>
+  </p>
+  <p>
+    <%= f.label :memory_per_desktop_mb %></br>
+    <%= f.text_field :memory_per_desktop_mb  %>
+  </p>
+  <p>
+    <%= f.label :capacity_per_desktop_mb %></br>
+    <%= f.text_field :capacity_per_desktop_mb  %>
+  </p>
+  <p>
+    <%= f.label :desktop_concurrency_percent %></br>
+    <%= f.text_field :desktop_concurrency_percent %>
+  </p>
+  <p>
+    <%= f.label :vcpus_per_physical_core %></br>
+    <%= f.text_field :vcpus_per_physical_core  %>
+  </p>
+  <p>
+    <%= f.label :memory_overcommit_percent %></br>
+    <%= f.text_field :memory_overcommit_percent  %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

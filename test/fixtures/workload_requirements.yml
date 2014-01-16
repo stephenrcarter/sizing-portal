@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workload_id: 
+  num_vms: 1
+  cpu_cores: 1
+  cpu_cycles_mhz: 1
+  ram_mb: 1
+  disk_capacity_mb: 1
+  ssd_capacity_mb: 1
+
+two:
+  workload_id: 
+  num_vms: 1
+  cpu_cores: 1
+  cpu_cycles_mhz: 1
+  ram_mb: 1
+  disk_capacity_mb: 1
+  ssd_capacity_mb: 1

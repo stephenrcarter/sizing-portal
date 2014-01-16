@@ -1,0 +1,2 @@
+module WorkloadRequirementsHelper
+end

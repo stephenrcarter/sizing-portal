@@ -1,0 +1,21 @@
+<h1>Welcome to the Nutanix Sizing Portal</h1>
+
+<table>
+ <tr>
+   <th>Title</th>
+   <th></th>
+   <th></th>
+   <th></th>
+ </tr>
+<% @environments.each do |environment| %>
+  <tr>
+    <td><%= environment.title %></td>
+    <td><%= link_to "Show", environment_path(environment) %></td>
+    <td><%= link_to "Edit", edit_environment_path(environment) %></td>
+    <td><%= link_to "Destroy", environment_path(environment),
+                    method: :delete, data: { confirm: "Are you sure?" } %></td>
+  </tr>
+<% end %>
+</table>
+
+<p><%= link_to "Add a New Environment", new_environment_path %></p>
