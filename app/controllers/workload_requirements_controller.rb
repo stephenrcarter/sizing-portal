@@ -18,7 +18,7 @@ class WorkloadRequirementsController < ApplicationController
 
     @workload.workload_requirement = WorkloadRequirement.new(
       params[:workload_requirement].permit(:num_vms,
-                                           :num_vcpus,
+                                           :num_cores,
                                            :cpu_cycles_mhz,
                                            :memory_mb,
                                            :disk_capacity_mb,
@@ -37,7 +37,7 @@ class WorkloadRequirementsController < ApplicationController
 
     if @workload.workload_requirement.update(
       params[:workload_requirement].permit(:num_vms,
-                                           :num_vcpus,
+                                           :num_cores,
                                            :cpu_cycles_mhz,
                                            :memory_mb,
                                            :disk_capacity_mb,

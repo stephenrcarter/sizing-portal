@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116004034) do
+ActiveRecord::Schema.define(version: 20140117222942) do
 
   create_table "database_workloads", force: true do |t|
     t.integer  "num_database_vms"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20140116004034) do
     t.integer  "memory_per_desktop_mb"
     t.integer  "capacity_per_desktop_mb"
     t.integer  "desktop_concurrency_percent"
-    t.integer  "vcpus_per_physical_core"
+    t.integer  "vcpus_per_core"
     t.integer  "memory_overcommit_percent"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20140116004034) do
   create_table "workload_requirements", force: true do |t|
     t.integer  "workload_id"
     t.integer  "num_vms"
-    t.integer  "num_vcpus"
+    t.integer  "num_cores"
     t.integer  "cpu_cycles_mhz"
     t.integer  "memory_mb"
     t.integer  "disk_capacity_mb"

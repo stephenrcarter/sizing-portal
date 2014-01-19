@@ -22,7 +22,7 @@ class VdiWorkloadsController < ApplicationController
       redirect_to @environment, :notice => "Your vdi workload was saved"
       
       # Create the workload requirements for this workload.
-      self.generate_workload_requirement(@workload)
+      generate_workload_requirement
     else
       render "new"
     end
@@ -49,11 +49,28 @@ class VdiWorkloadsController < ApplicationController
                                            :memory_per_desktop_mb, 
                                            :capacity_per_desktop_mb, 
                                            :desktop_concurrency_percent, 
-                                           :vcpus_per_physical_core, 
-                                           :memory_overcommit_percent)) 
+                                           :vcpus_per_core, 
+                                           :memory_overcommit_percent)
     end
 
-    def generate_workload_requirement(workload)
-      
+    def generate_workload_requirement
+      vdi_workload = @workload.vdi_workload
+      workload_requirement = WorkloadRequirement.new
+      num_vms = vdi_workload.num_desktops * 
+        (vdi_workload.desktop_concurrency_percent.to_f/100)
+      workload_requirement.num_vms = num_vms
+      workload_requirement.num_cores = 
+        (vdi_workload.num_vcpus_per_desktop * num_vms) / 
+          [1,vdi_workload.vcpus_per_core].max
+      workload_requirement.cpu_cycles_mhz = 
+        vdi_workload.mhz_per_desktop * num_vms
+      workload_requirement.memory_mb = 
+        vdi_workload.memory_per_desktop_mb * num_vms
+      workload_requirement.disk_capacity_mb =
+        vdi_workload.capacity_per_desktop_mb * num_vms
+      #workload_requirement.workload_id = @workload.id
+
+      @workload.workload_requirement = workload_requirement
+      @workload.workload_requirement.save
     end
 end
