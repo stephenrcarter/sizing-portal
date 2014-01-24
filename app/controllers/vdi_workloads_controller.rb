@@ -19,10 +19,10 @@ class VdiWorkloadsController < ApplicationController
     @workload.vdi_workload = VdiWorkload.new(vdi_workload_params)
     if @workload.vdi_workload.save
       @environment = Environment.find(@workload.environment_id)
-      redirect_to @environment, :notice => "Your vdi workload was saved"
-      
       # Create the workload requirements for this workload.
       generate_workload_requirement
+    
+      redirect_to @environment, :notice => "Your vdi workload was saved"
     else
       render "new"
     end
@@ -35,6 +35,7 @@ class VdiWorkloadsController < ApplicationController
     @environment = Environment.find(@workload.environment_id)  
 
     if @workload.vdi_workload.update(vdi_workload_params)
+      update_workload_requirement
       redirect_to @environment
     else
       render "edit"
@@ -50,12 +51,26 @@ class VdiWorkloadsController < ApplicationController
                                            :capacity_per_desktop_mb, 
                                            :desktop_concurrency_percent, 
                                            :vcpus_per_core, 
-                                           :memory_overcommit_percent)
+                                           :memory_overcommit_percent,
+                                           :peak_iops_per_desktop)
+    end
+
+    def update_workload_requirement
+      workload_requirement =
+        set_workload_requirement(@workload.vdi_workload,
+                                 @workload.workload_requirement)
+      @workload.workload_requirement.save
     end
 
     def generate_workload_requirement
-      vdi_workload = @workload.vdi_workload
-      workload_requirement = WorkloadRequirement.new
+      workload_requirement = 
+        set_workload_requirement(@workload.vdi_workload, 
+                                 WorkloadRequirement.new)
+      @workload.workload_requirement = workload_requirement
+      @workload.workload_requirement.save
+    end
+
+    def set_workload_requirement(vdi_workload, workload_requirement)
       num_vms = vdi_workload.num_desktops * 
         (vdi_workload.desktop_concurrency_percent.to_f/100)
       workload_requirement.num_vms = num_vms
@@ -68,9 +83,11 @@ class VdiWorkloadsController < ApplicationController
         vdi_workload.memory_per_desktop_mb * num_vms
       workload_requirement.disk_capacity_mb =
         vdi_workload.capacity_per_desktop_mb * num_vms
-      #workload_requirement.workload_id = @workload.id
-
-      @workload.workload_requirement = workload_requirement
-      @workload.workload_requirement.save
+      workload_requirement.peak_iops =
+        vdi_workload.peak_iops_per_desktop * num_vms
+      # For now no SSD requirements for VDI. If we can come up with a
+      # model, we can change this.
+      workload_requirement.ssd_capacity_mb = 0
+      return workload_requirement
     end
 end

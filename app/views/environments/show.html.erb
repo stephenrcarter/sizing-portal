@@ -1,5 +1,4 @@
 <h1><%= @environment.title %></h1>
-<small><%= @environment.created_at %></small>
 
 <h2>Workloads</h2>
 <table>
@@ -12,6 +11,7 @@
     <th>memory (MB)</th>
     <th>disk (MB)</th>
     <th>SSD (MB)</th>
+    <th>iops</th>
     <th></th>
     <th></th>
   </tr>
@@ -19,16 +19,35 @@
     <tr>
       <td><%= workload.workload_name %></td>
       <td><%= WorkloadType.find(workload.workload_type_id).workload_type_name %></td>
-      <td><%= workload.workload_requirement.num_vms %></td>
-      <td><%= workload.workload_requirement.num_cores %></td>
-      <td><%= workload.workload_requirement.cpu_cycles_mhz %></td>
-      <td><%= workload.workload_requirement.memory_mb %></td>
-      <td><%= workload.workload_requirement.disk_capacity_mb %></td>
-      <td><%= workload.workload_requirement.ssd_capacity_mb %></td>
+      <% num_vms = workload.workload_requirement.num_vms %>
+      <td><%= num_vms %></td>
+      <% num_cores = workload.workload_requirement.num_cores %>
+      <td><%= num_cores %></td>
+      <% cpu_cycles_mhz = workload.workload_requirement.cpu_cycles_mhz %>
+      <td><%= cpu_cycles_mhz %></td>
+      <% memory_mb = workload.workload_requirement.memory_mb %>
+      <td><%= memory_mb %></td>
+      <% disk_capacity_mb = workload.workload_requirement.disk_capacity_mb %>
+      <td><%= disk_capacity_mb %></td>
+      <% ssd_capacity_mb = workload.workload_requirement.ssd_capacity_mb %>
+      <td><%= ssd_capacity_mb %></td>
+      <% peak_iops = workload.workload_requirement.peak_iops %>
+      <td><%= peak_iops %> </td>
       <td><%= link_to("Edit", edit_workload_path(workload.id)) %></td>
       <td><%= link_to("Delete", workload, :method => :delete, :class => "action") %></td>
     </tr>
   <% end %>
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td><%= @environment.environment_requirement.num_vms %></td>
+      <td><%= @environment.environment_requirement.cpu_cores %></td>
+      <td><%= @environment.environment_requirement.cpu_cycles_mhz %></td>
+      <td><%= @environment.environment_requirement.memory_mb %></td>
+      <td><%= @environment.environment_requirement.disk_capacity_mb %></td>
+      <td><%= @environment.environment_requirement.ssd_capacity_mb %></td>
+      <td><%= @environment.environment_requirement.peak_iops %></td>
+    </tr>
 </table>
 
 <p><%= link_to("Add Workload", new_environment_workload_path(@environment)) %></p>

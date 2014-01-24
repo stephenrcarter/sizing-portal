@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117222942) do
+ActiveRecord::Schema.define(version: 20140124061341) do
+
+  create_table "clusters", force: true do |t|
+    t.integer  "environment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "clusters", ["environment_id"], name: "index_clusters_on_environment_id"
 
   create_table "database_workloads", force: true do |t|
     t.integer  "num_database_vms"
@@ -31,18 +39,37 @@ ActiveRecord::Schema.define(version: 20140117222942) do
   create_table "environment_requirements", force: true do |t|
     t.integer  "environment_id"
     t.integer  "cpu_cores"
-    t.float    "cpu_cycles"
-    t.integer  "ram_gb"
-    t.float    "disk_capacity_gb"
-    t.float    "ssd_capacity_gb"
+    t.integer  "cpu_cycles_mhz"
+    t.integer  "memory_mb"
+    t.integer  "disk_capacity_mb"
+    t.integer  "ssd_capacity_mb"
+    t.integer  "peak_iops"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "num_vms"
   end
 
   add_index "environment_requirements", ["environment_id"], name: "index_environment_requirements_on_environment_id"
 
   create_table "environments", force: true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "node_types", force: true do |t|
+    t.string   "name"
+    t.integer  "nodes_per_block"
+    t.integer  "ssd_count"
+    t.integer  "ssd_raw_size_gb"
+    t.integer  "hdd_count"
+    t.integer  "hdd_raw_size_gb"
+    t.integer  "cpu_socket_count"
+    t.integer  "cpu_cores_per_socket"
+    t.float    "cpu_clock_speed_ghz"
+    t.integer  "memory_capacity_gb"
+    t.string   "add_on_cards"
+    t.float    "list_price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140117222942) do
     t.integer  "memory_overcommit_percent"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "peak_iops_per_desktop"
   end
 
   add_index "vdi_workloads", ["workload_id"], name: "index_vdi_workloads_on_workload_id"
@@ -89,6 +117,7 @@ ActiveRecord::Schema.define(version: 20140117222942) do
     t.integer  "ssd_capacity_mb"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "peak_iops"
   end
 
   add_index "workload_requirements", ["workload_id"], name: "index_workload_requirements_on_workload_id"

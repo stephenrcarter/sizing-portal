@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  nodes_per_block: 1
+  ssd_count: 1
+  ssd_raw_size_gb: 1
+  hdd_count: 1
+  hdd_raw_size_gb: 1
+  cpu_socket_count: 1
+  cpu_cores_per_socket: 1
+  cpu_clock_speed_ghz: 1.5
+  memory_capacity_gb: 1
+  add_on_cards: MyString
+  list_price: 1.5
+
+two:
+  name: MyString
+  nodes_per_block: 1
+  ssd_count: 1
+  ssd_raw_size_gb: 1
+  hdd_count: 1
+  hdd_raw_size_gb: 1
+  cpu_socket_count: 1
+  cpu_cores_per_socket: 1
+  cpu_clock_speed_ghz: 1.5
+  memory_capacity_gb: 1
+  add_on_cards: MyString
+  list_price: 1.5

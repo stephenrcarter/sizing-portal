@@ -8,6 +8,6 @@
 
 
 WorkloadType.delete_all
-workload_types = WorkloadType.create([{ workload_type_name: "VDI" }, 
-                                      { workload_type_name: "Database" },
-                                      { workload_type_name: "Manual" }])
+workload_types = WorkloadType.create([{ id=1, workload_type_name: "VDI" }, 
+                                      { id=2, workload_type_name: "Database" },
+                                      { id=3, workload_type_name: "Manual" }])

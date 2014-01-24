@@ -3,15 +3,17 @@
 one:
   environment_id: 
   cpu_cores: 1
-  cpu_cycles: 1.5
-  ram_gb: 1
-  disk_capacity_gb: 1.5
-  ssd_capacity_gb: 1.5
+  cpu_cycles_mhz: 1
+  memory_mb: 1
+  disk_capacity_mb: 1
+  ssd_capacity_mb: 1
+  peak_iops: 1
 
 two:
   environment_id: 
   cpu_cores: 1
-  cpu_cycles: 1.5
-  ram_gb: 1
-  disk_capacity_gb: 1.5
-  ssd_capacity_gb: 1.5
+  cpu_cycles_mhz: 1
+  memory_mb: 1
+  disk_capacity_mb: 1
+  ssd_capacity_mb: 1
+  peak_iops: 1
