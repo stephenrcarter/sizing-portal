@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140124061341) do
+ActiveRecord::Schema.define(version: 20140129015249) do
 
   create_table "clusters", force: true do |t|
     t.integer  "environment_id"
@@ -57,6 +57,33 @@ ActiveRecord::Schema.define(version: 20140124061341) do
     t.datetime "updated_at"
   end
 
+  create_table "node_extra_types", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "node_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "node_extra_types", ["node_type_id"], name: "index_node_extra_types_on_node_type_id"
+
+  create_table "node_extras", force: true do |t|
+    t.integer  "node_extra_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "node_extras", ["node_extra_type_id"], name: "index_node_extras_on_node_extra_type_id"
+
+  create_table "node_type_memory_configurations", force: true do |t|
+    t.integer  "node_type_id"
+    t.integer  "memory_gb"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "node_type_memory_configurations", ["node_type_id"], name: "index_node_type_memory_configurations_on_node_type_id"
+
   create_table "node_types", force: true do |t|
     t.string   "name"
     t.integer  "nodes_per_block"
@@ -66,13 +93,22 @@ ActiveRecord::Schema.define(version: 20140124061341) do
     t.integer  "hdd_raw_size_gb"
     t.integer  "cpu_socket_count"
     t.integer  "cpu_cores_per_socket"
-    t.float    "cpu_clock_speed_ghz"
-    t.integer  "memory_capacity_gb"
-    t.string   "add_on_cards"
+    t.integer  "cpu_clock_speed_mhz"
     t.float    "list_price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "nodes", force: true do |t|
+    t.integer  "node_type_id"
+    t.integer  "cluster_id"
+    t.integer  "memory_mb"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "nodes", ["cluster_id"], name: "index_nodes_on_cluster_id"
+  add_index "nodes", ["node_type_id"], name: "index_nodes_on_node_type_id"
 
   create_table "vdi_workloads", force: true do |t|
     t.integer  "workload_id"

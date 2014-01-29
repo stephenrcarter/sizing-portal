@@ -52,5 +52,26 @@
 
 <p><%= link_to("Add Workload", new_environment_workload_path(@environment)) %></p>
 
+<h2>Clusters</h2>
+
+  <% @environment.clusters.each do |cluster| %>
+    <h3><%= cluster.name %></h3>
+      <table>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>VMs</th>
+            <th>cores</th>
+            <th>CPU cycles (mhz)</th>
+            <th>memory (MB)</th>
+            <th>disk (MB)</th>
+            <th>SSD (MB)</th>
+            <th>iops</th>
+            <th></th>
+            <th></th>
+          <tr>
+            <% cluster.nodes.each do |node| %>
+          <tr>
+
 <%= link_to "Back", environments_path %> 
 | <%= link_to "Edit", edit_environment_path(@environment) %>
